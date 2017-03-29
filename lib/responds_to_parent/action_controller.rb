@@ -22,6 +22,13 @@ module RespondsToParent
         # Clear out the previous render to prevent double render
         response.request.env['action_controller.instance'].instance_variable_set(:@_response_body, nil)
 
+       # Clear out the previous render to prevent double render and then render
+        if respond_to?(:erase_results, true)
+          erase_results
+        else
+          instance_variable_set(:@_response_body, nil)
+        end
+
         # Eval in parent scope and replace document location of this frame 
         # so back button doesn't replay action on targeted forms
         # loc = document.location to be set after parent is updated for IE
