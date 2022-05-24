@@ -19,10 +19,7 @@ module RespondsToParent
         # We're returning HTML instead of JS or XML now
         response.headers['Content-Type'] = 'text/html; charset=UTF-8'
 
-        # Clear out the previous render to prevent double render
-        response.request.env['action_controller.instance'].instance_variable_set(:@_response_body, nil)
-
-       # Clear out the previous render to prevent double render and then render
+        # Clear out the previous render to prevent double render and then render
         if respond_to?(:erase_results, true)
           erase_results
         else
